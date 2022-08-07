@@ -1,0 +1,95 @@
+{% extends 'base/base.html' %}{% load static %} {% block title %} Login {% endblock %} {% block content %} {% if page == 'login' %}
+<div class="login">
+    <div class="login__content">
+        <div class="login__img">
+            <img src="{% static 'style/image/img-login.svg' %}" alt="">
+        </div>
+
+        <div class="login__forms">
+            <form action="" method="POST" class="login__registre" id="login-in">
+                {% csrf_token %}
+                <h1 class="login__title">Login</h1>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="login__box">
+                    <i class='bx bx-user login__icon'></i>
+                    <input type="text" placeholder="Username" name="username" class="login__input">
+                </div>
+
+                <div class="login__box">
+                    <i class='bx bx-lock-alt login__icon'></i>
+                    <input type="password" placeholder="Password" name="password" class="login__input">
+                </div>
+
+                <a href="#" class="login__forgot" style="text-decoration: none;">Forgot password?</a>
+
+                <a href="#" style="text-decoration: none;"> <input class="input1" type="submit" value="Login"></a>
+
+                <div>
+                    <span class="login__account">Don't have an Account ?</span>
+                    <span id="sign-up"><a href="{% url 'register' %}"class="login__signin" style="text-decoration: none;">Sign Up</a></span>
+                </div>
+                <div class="login__social">
+                    <a href="{% url 'social:begin' 'github' %}" class="login__social-icon"><i class='bx bxl-github' ></i></a>
+                    <a href="{% url 'social:begin' 'facebook' %}" class="login__social-icon"><i class='bx bxl-facebook' ></i></a>
+                    <!-- <a href="#" class="login__social-icon"><i class='bx bxl-google' ></i></a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="login">
+    <div class="login__content">
+        <div class="login__img">
+            <img src="{% static 'style/image/img-login.svg' %}" alt="">
+        </div>
+        <div class="login__forms">
+            <form action="" method="POST" class="login__create" id="login-up">
+                {% csrf_token %}
+                <h1 class="login__title">Create Account</h1>
+
+                <div class="login__box">
+                    <i class='bx bx-user login__icon'></i> {{form.username}}
+                </div>
+                <!-- <div class="d-flex">
+                    <div class="login__box">
+                        <i class='bx bx-user login__icon'></i> {{form.first_name}}
+                    </div>
+                    <div class="login__box">
+                        <i class='bx bx-user login__icon'></i> {{form.last_name}}
+                    </div>
+                </div> -->
+
+                <div class="login__box">
+                    <i class='bx bx-at login__icon'></i> {{form.email}}
+                </div>
+
+                <div class="login__box">
+                    <i class='bx bx-lock-alt login__icon'></i> {{form.password1}}
+                </div>
+                <div class="login__box">
+                    <i class='bx bx-lock-alt login__icon'></i> {{form.password2}}
+                </div>
+
+                <a href="#" style="text-decoration: none ;"><input type="submit" class="input1" value="Sign Up"></a>
+
+                <div>
+                    <span class="login__account" style="text-align: center;">Already have an Account ?</span>
+                    <span id="sign-in"><a href="{% url 'login' %}"class="login__signup" style="text-decoration: none;">Login</a></span>
+                </div>
+                <div class="login__social">
+                    <a href="{% url 'social:begin' 'github' %}" class="login__social-icon"><i class='bx bxl-github' ></i></a>
+                    <a href="{% url 'social:begin' 'facebook' %}" class="login__social-icon"><i class='bx bxl-facebook' ></i></a>
+                    <!-- <a href="#" class="login__social-icon"><i class='bx bxl-google' ></i></a> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %} {% endblock %}
